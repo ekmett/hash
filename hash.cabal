@@ -1,5 +1,5 @@
-name:          hashable-extras
-category:      Data
+name:          hash
+category:      Data, Hash
 version:       0.1
 license:       BSD3
 cabal-version: >= 1.8
@@ -7,8 +7,8 @@ license-file:  LICENSE
 author:        Edward A. Kmett
 maintainer:    Edward A. Kmett <ekmett@gmail.com>
 stability:     provisional
-homepage:      http://github.com/analytics/hashable-extras/
-bug-reports:   http://github.com/analytics/hashable-extras/issues
+homepage:      http://github.com/analytics/hash/
+bug-reports:   http://github.com/analytics/hash/issues
 copyright:     Copyright (C) 2013 Edward A. Kmett
 build-type:    Custom
 tested-with:   GHC == 7.4.1, GHC == 7.6.1
@@ -28,7 +28,7 @@ extra-source-files:
 
 source-repository head
   type: git
-  location: git://github.com/analytics/hashable-extras.git
+  location: git://github.com/analytics/hash.git
 
 -- You can disable the doctests test suite with -f-test-doctests
 flag test-doctests
@@ -55,6 +55,7 @@ library
   exposed-modules:
     Data.Hashable.Extras
     Data.Hash.CRC32
+    Data.Hash.Double
     Data.Hash.Rolling
 
   if flag(lib-Werror)
