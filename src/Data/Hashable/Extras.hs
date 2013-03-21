@@ -24,7 +24,7 @@ instance Hashable Salt where
   hashWithSalt = const
   {-# INLINE hashWithSalt #-}
 
--- this lets us extract the default salt used by Data.Hashable 1.2
+-- | Extract the default salt used by `Data.Hashable`
 salt :: Int
 salt = hash Salt
 
