@@ -3,6 +3,7 @@
 {-# LANGUAGE MagicHash #-}
 {-# LANGUAGE UnboxedTuples #-}
 {-# LANGUAGE ForeignFunctionInterface #-}
+{-# LANGUAGE PatternGuards #-}
 --------------------------------------------------------------------
 -- |
 -- Copyright :  (c) Edward Kmett 2013
@@ -12,7 +13,7 @@
 -- Portability: non-portable
 --
 --------------------------------------------------------------------
-module Data.Analytics.Hash.Rolling
+module Data.Hash.Rolling
   ( roll'
   , roll
   ) where

@@ -3,6 +3,7 @@
 {-# LANGUAGE UnboxedTuples #-}
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
 --------------------------------------------------------------------
 -- |
 -- Copyright :  (c) Edward Kmett 2013
@@ -12,12 +13,11 @@
 -- Portability: non-portable
 --
 --------------------------------------------------------------------
-module Data.Analytics.Hash.CRC32
+module Data.Hash.CRC32
   ( CRC32
   , updated
   , final
   ) where
-
 
 import Control.Lens
 import Data.Bits

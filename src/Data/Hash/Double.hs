@@ -25,7 +25,7 @@ import Data.Hashable
 import Generics.Deriving
 
 -- $setup
--- >>> :load Data.Analytics.Hash.Double
+-- >>> :load Data.Hash.Double
 -- >>> import Control.Lens
 
 -- | \"Less Hashing, Same Performance: Building a Better Bloom Filter\" by
