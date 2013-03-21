@@ -13,7 +13,7 @@
 -- Portability: non-portable
 --
 --------------------------------------------------------------------
-module Data.Analytics.Hash.Double
+module Data.Hash.Double
   ( Hash(..)
   , sip
   ) where
