@@ -4,6 +4,10 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE ForeignFunctionInterface #-}
+
+#ifndef MIN_VERSION_lens
+#define MIN_VERSION_lens(x,y,z) 1
+#endif
 --------------------------------------------------------------------
 -- |
 -- Copyright :  (c) Edward Kmett 2013
@@ -42,7 +46,11 @@ instance (Reviewable p, Functor f) => Snoc p f CRC32 CRC32 Word8 Word8 where
   _Snoc = unto $ \(CRC32 h, w) -> CRC32 (shiftL h 8 `xor` lut w)
   {-# INLINE _Snoc #-}
 
+#if MIN_VERSION_lens(3,9,0)
 updated :: Getting (Endo (Endo CRC32)) t Word8 -> t -> CRC32 -> CRC32
+#else
+updated :: Getting (Endo (Endo CRC32)) t t Word8 Word8 -> t -> CRC32 -> CRC32
+#endif
 updated l t z = foldlOf' l snoc z t
 {-# INLINE updated #-}
 
