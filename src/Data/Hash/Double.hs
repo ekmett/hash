@@ -16,6 +16,7 @@
 module Data.Hash.Double
   ( Hash(..)
   , sip
+  , pepper
   ) where
 
 import Control.Applicative
@@ -46,9 +47,12 @@ data Hash = Hash {-# UNPACK #-} !Int {-# UNPACK #-} !Int
   deriving (Eq,Ord,Show,Read,Data,Typeable,Generic)
 
 sip :: Hashable a => a -> Hash
-sip a = Hash (hashWithSalt 0xdc36d1615b7400a4 a) -- taken from Data.Hash
-             (hashWithSalt 0x53dffa872f4d7341 a) -- chosen by fair die roll
+sip a = Hash (hash a)                -- hash with the salt taken from Data.Hash
+             (hashWithSalt pepper a) -- chosen by fair die roll
 {-# INLINE sip #-}
+
+pepper :: Int
+pepper = 0x53dffa872f4d7341
 
 type instance Index Hash   = Int
 type instance IxValue Hash = Int
