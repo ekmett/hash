@@ -38,12 +38,12 @@ instance Default CRC32 where
   def = CRC32 0xffffffff;
   {-# INLINE def #-}
 
-instance (Bifunctor p, Profunctor p, Functor f) => Cons p f CRC32 CRC32 Word8 Word8 where
-  _Cons = unto $ \(w, CRC32 h) -> CRC32 (shiftL h 8 `xor` lut w)
-  {-# INLINE _Cons #-}
+instance (Bifunctor p, Profunctor p, Functor f) => Snoc p f CRC32 CRC32 Word8 Word8 where
+  _Snoc = unto $ \(CRC32 h, w) -> CRC32 (shiftL h 8 `xor` lut w)
+  {-# INLINE _Snoc #-}
 
-updated :: Getting (Endo CRC32) t Word8 -> t -> CRC32 -> CRC32
-updated l t z = foldrOf l cons z t
+updated :: Getting (Endo (Endo CRC32)) t Word8 -> t -> CRC32 -> CRC32
+updated l t z = foldlOf' l snoc z t
 {-# INLINE updated #-}
 
 final :: CRC32 -> Word32
