@@ -1,0 +1,15 @@
+hash
+====
+
+[![Build Status](https://secure.travis-ci.org/ekmett/hash.png?branch=master)](http://travis-ci.org/ekmett/hash)
+
+This package provides a bunch of hashing machinery.
+
+Contact Information
+-------------------
+
+Contributions and bug reports are welcome!
+
+Please feel free to contact me through github or on the #haskell IRC channel on irc.freenode.net.
+
+-Edward Kmett
