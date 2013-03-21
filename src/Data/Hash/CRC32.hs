@@ -38,7 +38,7 @@ instance Default CRC32 where
   def = CRC32 0xffffffff;
   {-# INLINE def #-}
 
-instance (Bifunctor p, Profunctor p, Functor f) => Snoc p f CRC32 CRC32 Word8 Word8 where
+instance (Reviewable p, Functor f) => Snoc p f CRC32 CRC32 Word8 Word8 where
   _Snoc = unto $ \(CRC32 h, w) -> CRC32 (shiftL h 8 `xor` lut w)
   {-# INLINE _Snoc #-}
 
