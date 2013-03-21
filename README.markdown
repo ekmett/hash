@@ -1,7 +1,7 @@
 hash
 ====
 
-[![Build Status](https://secure.travis-ci.org/ekmett/hash.png?branch=master)](http://travis-ci.org/ekmett/hash)
+[![Build Status](https://secure.travis-ci.org/analytics/hash.png?branch=master)](http://travis-ci.org/analytics/hash)
 
 This package provides a bunch of hashing machinery.
 
