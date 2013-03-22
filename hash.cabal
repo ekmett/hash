@@ -1,6 +1,6 @@
 name:          hash
 category:      Data, Hash
-version:       0.1.3
+version:       0.2
 license:       BSD3
 cabal-version: >= 1.8
 license-file:  LICENSE
@@ -52,7 +52,6 @@ library
     transformers     >= 0.2      && < 0.4
 
   exposed-modules:
-    Data.Hashable.Extras
     Data.Hash.CRC32
     Data.Hash.Double
     Data.Hash.Rolling
