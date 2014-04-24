@@ -4,13 +4,9 @@
 {-# LANGUAGE FlexibleInstances #-}
 {-# LANGUAGE MultiParamTypeClasses #-}
 {-# LANGUAGE ForeignFunctionInterface #-}
-
-#ifndef MIN_VERSION_lens
-#define MIN_VERSION_lens(x,y,z) 1
-#endif
 --------------------------------------------------------------------
 -- |
--- Copyright :  (c) Edward Kmett 2013
+-- Copyright :  (c) Edward Kmett 2013-2014
 -- License   :  BSD3
 -- Maintainer:  Edward Kmett <ekmett@gmail.com>
 -- Stability :  experimental
@@ -19,14 +15,12 @@
 --------------------------------------------------------------------
 module Data.Hash.CRC32
   ( CRC32
-  , updated
+  , update
   , final
   ) where
 
-import Control.Lens
 import Data.Bits
 import Data.Default
-import Data.Monoid
 import Data.Word
 import Foreign.Storable
 import Foreign.Ptr
@@ -36,26 +30,18 @@ import GHC.Base
 -- CRC32
 ------------------------------------------------------------------------------
 
-newtype CRC32 = CRC32 { getCRC32 :: Word32 }
+newtype CRC32 = CRC32 Word32
 
 instance Default CRC32 where
-  def = CRC32 0xffffffff;
+  def = CRC32 0xffffffff
   {-# INLINE def #-}
 
-instance (Reviewable p, Functor f) => Snoc p f CRC32 CRC32 Word8 Word8 where
-  _Snoc = unto $ \(CRC32 h, w) -> CRC32 (shiftL h 8 `xor` lut w)
-  {-# INLINE _Snoc #-}
-
-#if MIN_VERSION_lens(3,9,0)
-updated :: Getting (Endo (Endo CRC32)) t Word8 -> t -> CRC32 -> CRC32
-#else
-updated :: Getting (Endo (Endo CRC32)) t t Word8 Word8 -> t -> CRC32 -> CRC32
-#endif
-updated l t z = foldlOf' l snoc z t
-{-# INLINE updated #-}
+update :: CRC32 -> Word8 -> CRC32
+update (CRC32 h) w = CRC32 (unsafeShiftL h 8 `xor` lut w)
+{-# INLINE update #-}
 
 final :: CRC32 -> Word32
-final = complement . getCRC32
+final (CRC32 h) = complement h
 {-# INLINE final #-}
 
 ------------------------------------------------------------------------------

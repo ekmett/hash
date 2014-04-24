@@ -6,7 +6,7 @@
 {-# LANGUAGE DeriveGeneric #-}
 --------------------------------------------------------------------
 -- |
--- Copyright :  (c) Edward Kmett 2013
+-- Copyright :  (c) Edward Kmett 2013-2014
 -- License   :  BSD3
 -- Maintainer:  Edward Kmett <ekmett@gmail.com>
 -- Stability :  experimental
@@ -17,10 +17,10 @@ module Data.Hash.Double
   ( Hash(..)
   , sip
   , pepper
+  , hashes
+  , hashed
   ) where
 
-import Control.Applicative
-import Control.Lens
 import Data.Data
 import Data.Hashable
 import Generics.Deriving
@@ -54,18 +54,11 @@ sip a = Hash (hash a)                -- hash with the salt taken from Data.Hash
 pepper :: Int
 pepper = 0x53dffa872f4d7341
 
-type instance Index Hash   = Int
-type instance IxValue Hash = Int
+hashes :: Hash -> [Int]
+hashes (Hash a0 b) = go a0 0 where
+  go !a !i = a + i*i : go (a + b) (i + 1)
+{-# INLINE hashes #-}
 
-instance Gettable f => Contains f Hash where
-  contains i f _ = coerce $ indexed f (i :: Int) True
-  {-# INLINE contains #-}
-
-instance Gettable f => Ixed f Hash where
-  ix i f (Hash a b) = coerce $ indexed f i (a + i * (b + i))
-  {-# INLINE ix #-}
-
-instance (Gettable f, Applicative f) => Each f Hash Hash Int Int where
-  each f (Hash a b) = go 0 where
-    go !i = indexed f i (a + i*(b+i)) *> go (i + 1)
-  {-# INLINE each #-}
+hashed :: Hash -> Int -> Int
+hashed (Hash a b) i = a + i*(b+i)
+{-# INLINE hashed #-}
