@@ -23,7 +23,7 @@ module Data.Hash.Double
 
 import Data.Data
 import Data.Hashable
-import Generics.Deriving
+import GHC.Generics
 
 -- $setup
 -- >>> :load Data.Hash.Double

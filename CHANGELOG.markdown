@@ -1,3 +1,9 @@
+0.4
+---
+* Drop the `generic-deriving` requirement (and GHC 7.0 support)
+* Support `transformers` 0.5
+* Support GHC 8
+
 0.2.0.1
 -------
 * Wider bounds for `generic-deriving` so we can maintain compatibility with GHC HEAD.
