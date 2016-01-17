@@ -75,6 +75,4 @@ test-suite doctests
       base,
       directory      >= 1.0,
       doctest        >= 0.9.1,
-      filepath,
-      lens
-
+      filepath
