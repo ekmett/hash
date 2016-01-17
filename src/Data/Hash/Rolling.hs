@@ -30,14 +30,17 @@ import GHC.Base
 
 #ifdef HLINT
 {-# ANN module "HLint: ignore Reduce duplication" #-}
+{-# ANN module "HLint: ignore Unused LANGUAGE pragma" #-}
 #endif
 
 foreign import ccall "static &rolling_lut" rolling_lut :: Ptr Int32
 
+#ifndef HLINT
 inlinePerformIO :: IO a -> a
 inlinePerformIO (IO m) = case m realWorld# of
   (# _, r #) -> r
 {-# INLINE inlinePerformIO #-}
+#endif
 
 lut :: Word8 -> Int32
 lut i = inlinePerformIO (peekElemOff rolling_lut (fromIntegral i))
