@@ -38,10 +38,10 @@ import GHC.Generics
 -- This stores a pair of hashes.
 --
 -- >>> take 4 $ hashes $ sip (42 :: Int)
--- [-2574874314062730062,-9186383815474761572,2648850756822758536,-3962658744589272970]
+-- [42,-8014524686259163228,2417694701191225120,-5596829985067938146]
 --
 -- >>> hashes (sip (42 :: Int)) !! 3
--- -3962658744589272970
+-- -5596829985067938146
 data Hash = Hash {-# UNPACK #-} !Int {-# UNPACK #-} !Int
   deriving (Eq,Ord,Show,Read,Data,Typeable,Generic)
 
