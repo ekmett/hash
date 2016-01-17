@@ -50,12 +50,10 @@ final (CRC32 h) = complement h
 
 foreign import ccall "static &crc32_lut" crc32_lut :: Ptr Word32
 
-#ifndef HLINT
 inlinePerformIO :: IO a -> a
 inlinePerformIO (IO m) = case m realWorld# of
   (# _, r #) -> r
 {-# INLINE inlinePerformIO #-}
-#endif
 
 lut :: Word8 -> Word32
 lut i = inlinePerformIO (peekElemOff crc32_lut (fromIntegral i))

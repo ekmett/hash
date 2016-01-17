@@ -1,9 +1,9 @@
 {-# LANGUAGE CPP #-}
-{-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE MagicHash #-}
+{-# LANGUAGE BangPatterns #-}
 {-# LANGUAGE UnboxedTuples #-}
-{-# LANGUAGE ForeignFunctionInterface #-}
 {-# LANGUAGE PatternGuards #-}
+{-# LANGUAGE ForeignFunctionInterface #-}
 --------------------------------------------------------------------
 -- |
 -- Copyright :  (c) Edward Kmett 2013-2014
@@ -28,14 +28,16 @@ import Foreign.Storable
 import Foreign.Ptr
 import GHC.Base
 
+#ifdef HLINT
+{-# ANN module "HLint: ignore Reduce duplication" #-}
+#endif
+
 foreign import ccall "static &rolling_lut" rolling_lut :: Ptr Int32
 
-#ifndef HLINT
 inlinePerformIO :: IO a -> a
 inlinePerformIO (IO m) = case m realWorld# of
   (# _, r #) -> r
 {-# INLINE inlinePerformIO #-}
-#endif
 
 lut :: Word8 -> Int32
 lut i = inlinePerformIO (peekElemOff rolling_lut (fromIntegral i))
