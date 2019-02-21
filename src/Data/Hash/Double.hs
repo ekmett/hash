@@ -22,7 +22,7 @@ module Data.Hash.Double
   ) where
 
 import Data.Data
-import Data.Hashable
+import Data.Hashable hiding (hashed)
 import GHC.Generics
 
 -- $setup
