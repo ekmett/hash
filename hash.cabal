@@ -1,8 +1,9 @@
+cabal-version:  2.2
 name:          hash
 category:      Data, Hash
 version:       0.4
-license:       BSD3
-cabal-version: >= 1.8
+license:       BSD-3-Clause
+
 license-file:  LICENSE
 author:        Edward A. Kmett
 maintainer:    Edward A. Kmett <ekmett@gmail.com>
@@ -38,6 +39,13 @@ flag test-doctests
 flag lib-Werror
   default: False
   manual: True
+
+custom-setup
+  setup-depends:
+    Cabal >= 1.10 && <2.5,
+    base  >= 4.5 && <5,
+    cabal-doctest >= 1 && <1.1,
+    filepath
 
 library
 
